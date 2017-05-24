@@ -38,16 +38,16 @@ import org.japo.java.events.AEM;
  */
 public class GUI extends JFrame {
 
-    // Campos de Hora
+    // Campos
     private int hor;
     private int min;
 
-    // Referencias a los Componentes
-    JLabel lblDisplay;
-    JRadioButton rbtHor;
-    JRadioButton rbtMin;
-    JButton btnMas;
-    JButton btnMen;
+    // Componentes
+    private JLabel lblDisplay;
+    private JRadioButton rbtHor;
+    private JRadioButton rbtMin;
+    private JButton btnMas;
+    private JButton btnMen;
 
     // Constructor
     public GUI() {
@@ -84,7 +84,7 @@ public class GUI extends JFrame {
         BevelBorder brdLBL = new BevelBorder(BevelBorder.LOWERED);
         EmptyBorder brdPNL = new EmptyBorder(10, 10, 10, 10);
 
-        // Gestor de Eventos de acción
+        // Gestor Eventos Acción
         AEM aem = new AEM(this);
 
         // Display
@@ -95,12 +95,12 @@ public class GUI extends JFrame {
         lblDisplay.setBorder(brdLBL);
         lblDisplay.setHorizontalAlignment(JLabel.CENTER);
 
-        // Seleccion - Horas
+        // Selector - Horas
         rbtHor = new JRadioButton("Horas");
         rbtHor.setFont(fntCTR);
         rbtHor.setSelected(true);
 
-        // Seleccion - Minutos
+        // Selector - Minutos
         rbtMin = new JRadioButton("Minutos");
         rbtMin.setFont(fntCTR);
         rbtMin.setSelected(true);
@@ -110,7 +110,7 @@ public class GUI extends JFrame {
         bg.add(rbtHor);
         bg.add(rbtMin);
 
-        // Botón - MAS
+        // Botón - MÁS
         btnMas = new JButton("+");
         btnMas.setFont(fntCTR);
         btnMas.addActionListener(aem);
@@ -120,21 +120,21 @@ public class GUI extends JFrame {
         btnMen.setFont(fntCTR);
         btnMen.addActionListener(aem);
 
-        // Panel Seleccion
+        // Panel Selector
         JPanel pnlSelector = new JPanel();
         pnlSelector.setBorder(brdPNL);
         pnlSelector.setLayout(new GridLayout(2, 1));
         pnlSelector.add(rbtHor);
         pnlSelector.add(rbtMin);
 
-        // Panel de ajuste
+        // Panel Ajuste
         JPanel pnlAjuste = new JPanel();
         pnlAjuste.setBorder(brdPNL);
         pnlAjuste.setLayout(new GridLayout(1, 2));
         pnlAjuste.add(btnMas);
         pnlAjuste.add(btnMen);
 
-        // Panel de control
+        // Panel de Control
         JPanel pnlControl = new JPanel();
         pnlControl.setBorder(brdPNL);
         pnlControl.setLayout(new GridLayout(1, 2));
@@ -162,29 +162,30 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    // Respuesta - Evento Acción
     public void procesarAccion(ActionEvent e) {
-        if (e.getSource().equals(btnMas)) {
-            if (rbtHor.isSelected()) {
+        if (e.getSource().equals(btnMas)) { // ---> MAS
+            if (rbtHor.isSelected()) {      // Horas
                 if (hor < 23) {
                     hor++;
                 } else {
                     hor = 0;
                 }
-            } else {
+            } else {                        // Minutos
                 if (min < 59) {
                     min++;
                 } else {
                     min = 0;
                 }
             }
-        } else {
-            if (rbtHor.isSelected()) {
+        } else {                            // ---> MENOS
+            if (rbtHor.isSelected()) {      // Horas
                 if (hor > 0) {
                     hor--;
                 } else {
                     hor = 23;
                 }
-            } else {
+            } else {                        // Minutos
                 if (min > 0) {
                     min--;
                 } else {
@@ -193,7 +194,7 @@ public class GUI extends JFrame {
             }
         }
 
-        // Mostrar display
+        // Mostrar Display
         lblDisplay.setText(String.format("%02d:%02d", hor, min));
     }
 }
